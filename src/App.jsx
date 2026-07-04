@@ -362,6 +362,16 @@ const PromptGenerator = () => {
         <div className="text-xs text-slate-400 text-center italic">
           Tip: Once copied, paste this prompt into your chosen AI tool (Midjourney, DALL-E, or Stable Diffusion) to see the rendition.
         </div>
+
+        <div className="mt-12 text-center space-y-1 pb-4">
+          <div className="h-px w-16 bg-slate-200 mx-auto mb-4"></div>
+          <p className="text-[11px] text-slate-400 uppercase tracking-tight">
+            © 2026 • Kolkata, India
+          </p>
+          <p className="text-xs text-slate-500">
+            Handcrafted by <span className="font-semibold text-slate-700">Rehan Imam Waris</span>, Chief of Voiceworx Events
+          </p>
+        </div>
       </div>
     </div>
   );
