@@ -10,18 +10,28 @@ const PromptGenerator = () => {
   const [audience, setAudience] = useState('High-end Luxury Seekers');
   const [model, setModel] = useState('Midjourney v6.1');
   const [gpu, setGpu] = useState('NVIDIA RTX 4090 (24GB)');
+  const [palette, setPalette] = useState('Monochromatic Gold');
+  const [hasFlowers, setHasFlowers] = useState('No');
+  const [flowerNames, setFlowerNames] = useState('');
   const [extraDetails, setExtraDetails] = useState('');
   const [copied, setCopied] = useState(false);
   const [showGuide, setShowGuide] = useState(false);
 
   const styles = ['Art Deco', 'Bio-Futurism', 'Neo-Classical', 'Cyber-Deco', 'Organic Minimalist', 'Mid-Century Modern', 'Parametric Fluidity', 'Industrial Grunge'];
-  const materials = ['Frosted Glass & Gold', 'Iridescent Acrylic', 'Polished Chrome & Marble', 'Raw Concrete & Neon', 'Velvet & Brass', 'Liquid Metal', 'Translucent Resin', 'Sustainable Bamboo & Copper'];
+  const materials = [
+    'Frosted Glass & Gold', 'Iridescent Acrylic', 'Polished Chrome & Marble', 'Raw Concrete & Neon', 'Velvet & Brass', 'Liquid Metal', 'Translucent Resin', 'Sustainable Bamboo & Copper', 
+    'MDF & ply', 'Thermocol & sholapith', 'Fibre glass & paintwork', 'Clay & paint',
+    'Brushed Aluminum', 'Oxidized Copper', 'Antique Bronze', 'Hammered Silver',
+    'Woven Rattan', 'Raw Silk', 'Jute Twine', 'Recycled Paper Pulp'
+  ];
   const lightings = ['Volumetric Cinematic', 'Soft Ambient Glow', 'High-Contrast Studio', 'Cyberpunk Neon', 'Natural Skylight', 'Dichroic Prism Lighting', 'Golden Hour Warmth', 'Subsurface Scattering'];
   const settings = ['Minimalist Gallery', 'Luxury Hotel Lobby', 'Outdoor Zen Garden', 'Surreal Void', 'Industrial Loft', 'Futuristic Airport Terminal', 'Underwater Atrium', 'Mountain-top Retreat'];
   const sizes = ['Large-scale Monumental', 'Immersive Walk-through', 'Human-sized Focal Point', 'Table-top Sculptural', 'Ceiling-suspended Kinetic'];
   const audiences = ['High-end Luxury Seekers', 'Tech Enthusiasts', 'Art Gallery Collectors', 'Corporate Executives', 'General Public / Tourists', 'Eco-conscious Minimalists'];
   const models = ['Midjourney v6.1', 'DALL-E 3', 'Stable Diffusion XL', 'Leonardo AI (Kandinsky)', 'Adobe Firefly v3'];
   const gpus = ['NVIDIA RTX 4090 (24GB)', 'NVIDIA RTX 3090', 'A100 Tensor Core (Cloud)', 'H100 NVL (High-End Enterprise)', 'Apple M3 Max (Local Rendering)'];
+  const palettes = ['Monochromatic Gold', 'Deep Emerald & Brass', 'Pastel Sunset Hues', 'Midnight Blue & Silver', 'Vibrant Festive Marigold', 'Earth Tone Ochre', 'Cyberpunk Neon Pink & Teal', 'Neutral Sand & Stone'];
+  const indianFlowers = ['Marigold (Genda)', 'Jasmine (Mogra)', 'Lotus (Kamal)', 'Hibiscus (Gudhal)', 'Rose (Gulab)', 'Frangipani (Champa)', 'Bougainvillea', 'Orchids'];
 
   // Logic for GPU and Model Recommendations
   React.useEffect(() => {
@@ -50,7 +60,7 @@ const PromptGenerator = () => {
   // Fallback for GPU using Nullish Coalescing (best practice for null/undefined)
   const gpuSafe = gpu ?? 'High-performance GPU';
 
-  const generatedPrompt = `A high-end 3D rendition of a ${size} ${style} decorative installation, designed to appeal to ${audience}. The structure is crafted from ${material}, featuring intricate patterns and unique forms. ${extraDetails ? `Additional features: ${extraDetails}. ` : ''}Set within a ${setting}, illuminated by ${lighting} lighting that emphasizes textures and reflections. Optimized for ${model} rendering with ${gpuSafe} compute acceleration. Rendered in 8k resolution, Unreal Engine 5 style, hyper-realistic, architectural photography, sharp focus, Octane render --v 6.1`;
+  const generatedPrompt = `A high-end 3D rendition of a ${size} ${style} decorative installation, designed to appeal to ${audience}. The color palette follows a ${palette} scheme. The structure is crafted from ${material}, featuring intricate patterns and unique forms. ${hasFlowers === 'Yes' ? `Incorporating a floral arrangement featuring ${flowerNames || 'traditional Indian flowers'}. ` : ''}${extraDetails ? `Additional features: ${extraDetails}. ` : ''}Set within a ${setting}, illuminated by ${lighting} lighting that emphasizes textures and reflections. Optimized for ${model} rendering with ${gpuSafe} compute acceleration. Rendered in 8k resolution, Unreal Engine 5 style, hyper-realistic, architectural photography, sharp focus, Octane render --v 6.1`;
 
   // Real-time tracking of the prompt and GPU status
   console.log("Raw GPU Value:", gpu);
@@ -64,22 +74,25 @@ const PromptGenerator = () => {
   };
 
   return (
-    <div className="flex flex-col h-full bg-slate-50 p-6 font-sans">
-      <div className="max-w-2xl mx-auto w-full space-y-8">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold text-slate-900 flex items-center justify-center gap-2">
-            <Sparkles className="text-blue-500" /> 3D Installation Prompt Pro
+    <div className="flex flex-col h-full bg-[#f8fafc] p-6 font-sans">
+      <div className="max-w-3xl mx-auto w-full space-y-8">
+        <div className="text-center space-y-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-xs font-bold uppercase tracking-wider mb-2">
+            <Sparkles size={12} /> AI-Powered Rendering Engine
+          </div>
+          <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight">
+            3D Installation <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Prompt Pro</span>
           </h1>
-          <p className="text-slate-600 mt-2">Fine-tune your installation parameters to generate a high-fidelity AI prompt.</p>
+          <p className="text-slate-500 text-lg max-w-lg mx-auto">Architectural-grade prompt engineering for high-end decorative installations.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5 bg-white p-8 rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-200">
           <div className="space-y-2">
-            <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
-              <Palette size={16} /> Artistic Style
+            <label className="text-[13px] font-bold text-slate-500 uppercase tracking-wide flex items-center gap-2">
+              <Palette size={14} className="text-indigo-500" /> Artistic Style
             </label>
             <select 
-              className="w-full p-2 border rounded-md bg-slate-50 border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none"
+              className="w-full p-2.5 border rounded-lg bg-slate-50 border-slate-200 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all cursor-pointer text-slate-700 font-medium"
               value={style}
               onChange={(e) => setStyle(e.target.value)}
             >
@@ -185,6 +198,77 @@ const PromptGenerator = () => {
             </select>
           </div>
 
+          <div className="space-y-2">
+            <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
+              <Palette size={16} className="text-pink-500" /> Color Palette & Hues
+            </label>
+            <select 
+              className="w-full p-2 border rounded-md bg-slate-50 border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none"
+              value={palette}
+              onChange={(e) => setPalette(e.target.value)}
+            >
+              {palettes.map(p => <option key={p} value={p}>{p}</option>)}
+            </select>
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
+              <Sparkles size={16} className="text-orange-500" /> Floral Requirement?
+            </label>
+            <div className="flex gap-4 p-2">
+              {['Yes', 'No'].map(opt => (
+                <label key={opt} className="flex items-center gap-2 cursor-pointer">
+                  <input 
+                    type="radio" 
+                    name="hasFlowers" 
+                    value={opt} 
+                    checked={hasFlowers === opt}
+                    onChange={(e) => setHasFlowers(e.target.value)}
+                    className="w-4 h-4 text-blue-600"
+                  />
+                  <span className="text-sm text-slate-700 font-medium">{opt}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          {hasFlowers === 'Yes' && (
+            <div className="space-y-2 md:col-span-2 bg-orange-50/50 p-4 rounded-xl border border-orange-100">
+              <label className="text-sm font-semibold text-orange-800 flex items-center gap-2">
+                🌸 Select Indian Flower Types
+              </label>
+              <div className="flex flex-wrap gap-2 mb-3">
+                {indianFlowers.map(flower => (
+                  <button
+                    key={flower}
+                    onClick={() => {
+                      const current = flowerNames.split(',').map(f => f.trim()).filter(f => f);
+                      if (current.includes(flower)) {
+                        setFlowerNames(current.filter(f => f !== flower).join(', '));
+                      } else {
+                        setFlowerNames([...current, flower].join(', '));
+                      }
+                    }}
+                    className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${
+                      flowerNames.includes(flower) 
+                        ? 'bg-orange-500 text-white' 
+                        : 'bg-white text-orange-600 border border-orange-200 hover:border-orange-400'
+                    }`}
+                  >
+                    {flower}
+                  </button>
+                ))}
+              </div>
+              <input 
+                type="text"
+                placeholder="Or type custom flower names..."
+                className="w-full p-2 border rounded-md bg-white border-orange-200 focus:ring-2 focus:ring-orange-500 outline-none"
+                value={flowerNames}
+                onChange={(e) => setFlowerNames(e.target.value)}
+              />
+            </div>
+          )}
+
           <div className="space-y-2 md:col-span-2">
             <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
               <Sparkles size={16} className="text-blue-500" /> Custom Details (comma separated)
@@ -199,15 +283,28 @@ const PromptGenerator = () => {
           </div>
         </div>
 
-        <div className="bg-slate-900 rounded-xl p-6 relative group border border-slate-800">
-          <h3 className="text-slate-400 text-xs font-mono uppercase tracking-widest mb-3">Generated Prompt</h3>
-          <p className="text-slate-100 text-lg leading-relaxed font-serif italic">
-            "{generatedPrompt}"
-          </p>
+        <div className="bg-slate-900 rounded-2xl p-8 relative overflow-hidden group border border-slate-800 shadow-2xl shadow-blue-900/20">
+          <div className="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-40 transition-opacity">
+            <Zap size={40} className="text-blue-400" />
+          </div>
+          
+          <h3 className="text-blue-400 text-[11px] font-bold uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span> Final Prompt Output
+          </h3>
+          
+          <div className="relative">
+            <p className="text-slate-100 text-xl leading-relaxed font-serif italic selection:bg-blue-500/30">
+              "{generatedPrompt}"
+            </p>
+          </div>
           
           <button 
             onClick={copyToClipboard}
-            className="mt-6 w-full flex items-center justify-center gap-2 py-3 px-4 bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-all font-medium"
+            className={`mt-8 w-full flex items-center justify-center gap-2 py-4 px-6 rounded-xl transition-all font-bold text-sm tracking-wide ${
+              copied 
+                ? 'bg-green-500 text-white shadow-lg shadow-green-500/20' 
+                : 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white shadow-lg shadow-blue-600/20'
+            }`}
           >
             {copied ? (
               <><Check size={18} /> Copied to Clipboard</>
